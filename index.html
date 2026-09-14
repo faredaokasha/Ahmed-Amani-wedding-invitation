@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف ملكية - أحمد وأماني</title>
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- خلفية النجوم المتحركة -->
+  <canvas id="starsCanvas"></canvas>
+
+  <div class="main-card-container">
+    
+    <!-- HERO SECTION -->
+    <header class="hero-section reveal active">
+      <div class="royal-badge">✦ دعوة زفاف ملكية ✦</div>
+
+      <!-- إطار الصورة القوسي الدائري -->
+      <div class="couple-avatar-wrapper">
+        <img src="couple.jpg" alt="أحمد وأماني" class="couple-avatar">
+      </div>
+
+      <h1 class="wedding-title">أحمد <span class="amp">&amp;</span> أماني</h1>
+      <p class="wedding-date">الثلاثاء • 11 نوفمبر 2026</p>
+
+      <!-- العداد التنازلي -->
+      <div class="countdown-container">
+        <div class="countdown-box">
+          <span class="countdown-num" id="days">00</span>
+          <span class="countdown-label">يوم</span>
+        </div>
+        <div class="countdown-dots">:</div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="hours">00</span>
+          <span class="countdown-label">ساعة</span>
+        </div>
+        <div class="countdown-dots">:</div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="minutes">00</span>
+          <span class="countdown-label">دقيقة</span>
+        </div>
+        <div class="countdown-dots">:</div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="seconds">00</span>
+          <span class="countdown-label">ثانية</span>
+        </div>
+      </div>
+
+      <div class="sparkles-divider">✦ ✧ ✦</div>
+
+      <div class="quran-card reveal">
+        <p class="quran-verse">«وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً»</p>
+        <p class="hero-subtitle">يسعدنا ويشرفنا حضوركم لتشاركونا فرحتنا ببدء فصل جديد من حياتنا 🤍</p>
+      </div>
+    </header>
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid">
+      
+      <!-- VENUE SECTION -->
+      <section class="section-card reveal">
+        <div>
+          <h2 class="section-title">تفاصيل الحفل ✨</h2>
+          <p class="section-desc">مواعيد وموقع حفل الزفاف</p>
+
+          <div class="venue-details">
+            <div class="info-row">
+              <span class="info-icon">🗓️</span>
+              <div class="info-content">
+                <h4>الموعد</h4>
+                <p>الثلاثاء، 11 نوفمبر 2026</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">⏰</span>
+              <div class="info-content">
+                <h4>التوقيت</h4>
+                <p>من 7:00 مساءً حتى 11:00 مساءً</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">📍</span>
+              <div class="info-content">
+                <h4>المكان</h4>
+                <p>قاعة إليزيه - نادي 6 أكتوبر الرياضي</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://maps.app.goo.gl/aAAyj7k8v4t7dED66?g_st=ic" target="_blank" class="outline-gold-btn">
+          📍 موقع القاعة على الخريطة
+        </a>
+      </section>
+
+      <!-- UPLOAD SECTION (ترسل للواتساب مباشرة) -->
+      <section class="section-card reveal">
+        <div>
+          <h2 class="section-title">شاركونا لقطاتكم 📸</h2>
+          <p class="section-desc">ارفعوا صوركم وفيديوهاتكم وستصلنا مباشرة على واتساب</p>
+
+          <div class="upload-box">
+            <div class="upload-icon">📷</div>
+            <p class="upload-text">اختر الصور أو الفيديوهات لإرسالها</p>
+            
+            <label for="photoUploader" class="primary-gold-btn">
+              📁 اختر الملفات للإرسال
+            </label>
+            <input type="file" id="photoUploader" accept="image/*,video/*" multiple class="file-input">
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- GUESTBOOK SECTION (تظهر في الموقع عبر Firebase) -->
+    <section class="section-card reveal">
+      <h2 class="section-title">اكتب كلمة للعروسين ✍️</h2>
+      <p class="section-desc">اترك أمنية مباركة لأحمد وأماني لتظهر في حائط التهنئات</p>
+
+      <form id="guestbookForm" class="guestbook-form">
+        <input type="text" id="guestName" placeholder="اسمك الكريم" class="form-control" required>
+        <textarea id="guestMessage" rows="3" placeholder="اكتب مباركتك هنا..." class="form-control textarea-control" required></textarea>
+        <button type="submit" class="submit-btn" id="submitBtn">نشر المباركة 💌</button>
+      </form>
+
+      <!-- حائط التهنئات المباشر -->
+      <div id="messagesFeed" class="messages-feed"></div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
